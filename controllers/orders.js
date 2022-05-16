@@ -2,7 +2,7 @@ const database = require('./database');
 
 module.exports = addProduct: async function (order_time, price, quantity) {
         const sql = "INSERT INTO orders(order_time, price, quantity)" +
-            " VALUES(?,?,?,?);";
+            " VALUES(?,?,?);";
     },
 
     ordersList: async function (req, res, next) {
