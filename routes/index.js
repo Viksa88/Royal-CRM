@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const cm = require('../controllers/customers');
 const pm = require('../controllers/products');
-const ordersModule = require('../controllers/orders');
+const or = require('../controllers/orders');
 const path = require('path');
 
 /* GET home page. */
@@ -47,6 +47,13 @@ router.get('/products/search/:id', pm.searchProducts);
 
 
 /* orders */
-router.get('/orders', ordersModule.ordersList);
-
-module.exports = router;
+router.get('/orders-home', function (req, res, next) {
+  const filePath = path.join(__dirname, '../client', 'orders-home.html');
+  res.sendFile(filePath);
+})
+router.get('/orders', or.ordersList);
+router.post('/orders', or.addOrders);
+router.get('/orders/export', or.exportOrders);
+router.patch('/orders', or.editOrders);
+router.delete('/orders', or.deleteOrders);
+router.get('/orders/search/:id', or.searchOrders);
