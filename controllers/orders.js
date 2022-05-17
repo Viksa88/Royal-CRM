@@ -15,5 +15,31 @@ module.exports = {
         } catch (err) {
             console.log(err);
         }
-    }
+    },
+
+        
+    exportOrders: async function () {
+        const sql = "SELECT order_time, price, quantity FROM orders ORDER BY name ASC;";
+    },
+
+    
+    editOrders: async function () {
+       
+
+     },
+
+    
+    deleteOrders: async function () {
+        
+     },
+
+    
+    searchOrders: async function () {
+      
+     },
+
+     addOrders: async function () {
+
+     }
+
 }
