@@ -1,36 +1,18 @@
 const express = require('express');
 const router = express.Router();
-const cm = require('../controllers/customers');
 const pm = require('../controllers/products');
-const or = require('../controllers/orders');
+const ordersModule = require('../controllers/orders');
 const path = require('path');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-  res.send('this is the home page. use /customers /products or /orders.')
+  res.send('this is the home page. use /customers/home /products/home or /orders/home.')
 });
 
-/* customers */
-router.get('/cusomters-home', function (req, res, next) {
-  const filePath = path.join(__dirname, '../client', 'customers-home.html');
+router.get('/chat', function (req, res, next) {
+  const filePath = path.join(__dirname, '../client', 'chat.html');
   res.sendFile(filePath);
-})
-
-router.get('/customers', cm.customersList);
-router.post('/customers', cm.addCustomer);
-
-// todo: delete customer
-router.delete('/customers', cm.deleteCustomer);
-
-// todo: export all customers to file
-router.get('/customers/export', cm.exportCustomers);
-
-// todo: edit/update customer
-router.patch('/customers', cm.updateCustomer);
-
-// todo: view more details of a customer
-router.get('/customer-detailes', cm.viewCustomerDetails);
-
+});
 
 /* products */
 router.get('/products-home', function (req, res, next) {
@@ -40,20 +22,11 @@ router.get('/products-home', function (req, res, next) {
 router.get('/products', pm.productsList);
 router.post('/products', pm.addProduct);
 router.get('/products/export', pm.exportProducts);
-router.patch('/products', pm.editProduct);
-router.delete('/products', pm.deleteProduct);
-router.get('/products/search/:id', pm.searchProducts);
-
-
+// router.patch('/products', pm.editProduct);
+// router.delete('/products', pm.deleteProduct);
+// router.get('/products/search/:id', pm.searchProducts);
 
 /* orders */
-router.get('/orders-home', function (req, res, next) {
-  const filePath = path.join(__dirname, '../client', 'orders-home.html');
-  res.sendFile(filePath);
-})
-router.get('/orders', or.ordersList);
-router.post('/orders', or.addOrders);
-router.get('/orders/export', or.exportOrders);
-router.patch('/orders', or.editOrders);
-router.delete('/orders', or.deleteOrders);
-router.get('/orders/search/:id', or.searchOrders);
+router.get('/orders', ordersModule.ordersList);
+
+module.exports = router;
