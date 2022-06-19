@@ -1,3 +1,6 @@
+import { Application, Request, Response, NextFunction, Errback } from "express";
+
+
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
@@ -12,7 +15,7 @@ var customersRouter = require('./routes/customers');
 var productsRouter = require('./routes/products');
 var ordersRouter = require('./routes/orders');
 
-var app = express();
+var app:Application = express();
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -32,7 +35,7 @@ app.use(function (req, res, next) {
 })
 
 // custom error handler
-app.use(function (err, req, res, next) {
+app.use(function (err: , req Request, res: Response, next: NextFunction) {
     console.error(err.stack);
     res.locals.message = err.message;
     res.locals.error = err;
